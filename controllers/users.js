@@ -4,14 +4,16 @@
 
 //[SECTION] Functionalities [Create]
 	module.exports.registerUser = (data)=>{
-		// let fName = data.firstName;
-		// let lName = data.lastName;
+		let fName = data.firstName;
+		let lName = data.lastName;
+		let mName = data.middleName;
 		let email = data.email;
 		let passW = data.password;
 
 			let newUser = new User({
-				// firstName: fName,
-				// lastName: lName,
+				firstName: fName,
+				lastName: lName,
+				middleName: mName,
 				email: email,
 				password: bcrypt.hashSync(passW, 10),
 			});
