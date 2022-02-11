@@ -2,6 +2,7 @@
 	const express = require('express');
 	const mongoose = require('mongoose');
 	const dotenv = require('dotenv');
+	const userRoutes = require('./routes/users');
 
 //[SECTION] Environment Variables
 	dotenv.config()
@@ -17,11 +18,12 @@
 		console.log('Connected to MongoDB')
 	});
 
-//[SECTION] Routing Components
-
 //[SECTION] Server Setup 
 	const app = express();
 	app.use(express.json());
+
+//[SECTION] Server Routes
+	app.use('/users', userRoutes);
 
 //[SECTION]
 //[SECTION]
