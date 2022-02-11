@@ -28,5 +28,7 @@
 			default: false
 		}
 	});
+
+	
 //[SECTION] Model
 	module.exports = mongoose.model('User', userSchema);
