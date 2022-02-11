@@ -26,3 +26,6 @@
 //[SECTION]
 //[SECTION]
 	app.listen(port, ()=>console.log(`You are now Tuning in Port ${port}`));
+	app.get('/',(req,res)=>{
+		res.send(`Project Deployed Successfully`);
+
