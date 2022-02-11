@@ -1,0 +1,19 @@
+{
+  "name": "capstone2",
+  "version": "1.0.0",
+  "description": "Capstone 2 Development - Ecommerce API",
+  "main": "app.js",
+  "scripts": {
+    "start": "nodemon app"
+  },
+  "keywords": [],
+  "author": "John Louie Sequena",
+  "license": "ISC",
+  "dependencies": {
+    "bcrypt": "^5.0.1",
+    "dotenv": "^16.0.0",
+    "express": "^4.17.2",
+    "mongoose": "^6.2.1",
+    "nodemon": "^2.0.15"
+  }
+}
