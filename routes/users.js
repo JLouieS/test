@@ -5,7 +5,7 @@
 //[SECTION] Routing Component
 	const route = exp.Router();
 
-//[SECTION] Routes [GET]
+//[SECTION] Routes [POST AND GET]
 	//Register User
 	route.post('/register', (req, res)=>{
 		let userData = req.body;
