@@ -3,6 +3,7 @@
 	const bcrypt = require('bcrypt');
 
 //[SECTION] Functionalities [Create]
+	//Register User
 	module.exports.registerUser = (data)=>{
 		let fName = data.firstName;
 		let lName = data.lastName;
@@ -25,7 +26,7 @@
 				} else {
 					return false;
 				}
-			})
+			});
 	};
 	//Retrieve All Users
 	module.exports.getAllUsers = ()=>{
@@ -33,3 +34,52 @@
 			return resultQuery;
 		});
 	};
+	//Retrieve Single User
+	module.exports.getUser = (id) =>{
+		return User.findById(id).then((foundUser, err)=>{
+			
+			if (foundUser) {
+				foundUser.password = '';
+				return foundUser;
+			} else {
+				return 'User Not Found';
+			}
+		});
+	};
+	//Set as Admin
+	module.exports.setAsAdmin =(user, userUpdate) =>{
+		let adminId = userUpdate.isAdmin;
+		let updatedUser = {
+			isAdmin: adminId
+		};
+		return User.findByIdAndUpdate(user, updatedUser).then((foundUser, err)=>{
+			if (foundUser) {
+				return`${foundUser.firstName} has been set as Admin. Congrats!`;
+			} else {
+				return "Failed to Set as Admin!";
+			}
+		});
+	};
+	//Check if Email Exists
+	module.exports.checkEmailExists = (reqBody) =>{
+		let doesExist = {
+			email: reqBody.email
+		}
+		return User.find(doesExist).then((exist, err)=>{
+			if (exist.length > 0) {
+				return `Email already exists!`;
+			} else {
+				return `Email is still available!`;
+			}
+		});
+	};
+	module.exports.deleteUser =(id) =>{
+		return User.findByIdAndRemove(id).then((deletedUser, err)=>{
+			if (deletedUser) {
+				return 'Account Deleted Successfully!';
+			} else {
+				return 'No Account were Removed!';
+			}
+		})
+	}
+

@@ -23,13 +23,14 @@
 			type: Date,
 			default: new Date()
 		}
-		// orders: 
-		// {
-		// 	orderId: {
-		// 		type: String,
-		// 		required: [true, "Order's Id is Required"]
-		// 	}
-		// }
+		orders: [ 
+		{
+			orderId: {
+				type: String,
+				required: [true, "Order's Id is Required"]
+				}
+			}
+		]
 	});
 //[SECTION] Model
 	module.exports = mongoose.model('Product', productSchema);
