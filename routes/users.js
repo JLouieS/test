@@ -14,6 +14,14 @@
 			res.send(outcome);
 		});
 	});
+	//Login User
+	route.post('/login',(req, res)=>{
+		let data = req.body;
+		controller.loginUser(data).then(result =>{
+			res.send(result);
+		})
+	})
+
 	//Retrieve All Users
 	route.get('/',(req, res)=>{
 		controller.getAllUsers().then(result=>{

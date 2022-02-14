@@ -1,6 +1,7 @@
 //[SECTION] Dependencies and Modules
 	const User = require('../models/User');
 	const bcrypt = require('bcrypt');
+	const auth = require('../auth');
 
 //[SECTION] Functionalities [Create]
 	//Register User
@@ -27,6 +28,25 @@
 					return false;
 				}
 			});
+	};
+	//Login User
+	module.exports.loginUser =(reqBody)=>{
+		let uEmail = reqBody.email;
+		let uPass = reqBody.password;
+		return User.findOne({email: uEmail}).then(result=>{
+			if (result === null) {
+				return 'Email does not Exist!';
+			} else {
+				let passW = result.password;
+				const isMatched = bcrypt.compareSync(uPass, passW);
+				if (isMatched) {
+					let data = result.toObject();
+					return {access: auth.createAccessToken(data)}
+				} else {
+					return 'Passwords Does Not Match. Check Credentials!';
+				}
+			};
+		});
 	};
 	//Retrieve All Users
 	module.exports.getAllUsers = ()=>{
@@ -72,6 +92,7 @@
 			}
 		});
 	};
+	//Delete User
 	module.exports.deleteUser =(id) =>{
 		return User.findByIdAndRemove(id).then((deletedUser, err)=>{
 			if (deletedUser) {
@@ -79,6 +100,6 @@
 			} else {
 				return 'No Account were Removed!';
 			}
-		})
-	}
+		});
+	};
 
