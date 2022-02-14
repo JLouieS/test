@@ -47,14 +47,13 @@
 		});
 	};
 	//Set as Admin
-	module.exports.setAsAdmin =(user, userUpdate) =>{
-		let adminId = userUpdate.isAdmin;
-		let updatedUser = {
-			isAdmin: adminId
+	module.exports.setAsAdmin =(userId) =>{
+		let updateUser = {
+			isAdmin: true
 		};
-		return User.findByIdAndUpdate(user, updatedUser).then((foundUser, err)=>{
-			if (foundUser) {
-				return`${foundUser.firstName} has been set as Admin. Congrats!`;
+		return User.findByIdAndUpdate(userId, updateUser).then((admin, err)=>{
+			if (admin) {
+				return`${admin.firstName} has been set as Admin.`;
 			} else {
 				return "Failed to Set as Admin!";
 			}

@@ -29,10 +29,9 @@
 	});
 //[SECTION] Routes [PUT]
 	//Set as Admin
-	route.put('/:userId/setAsAdmin', (req,res)=>{
+	route.put('/:userId/set-as-admin', (req,res)=>{
 		let id = req.params.userId;
-		let body = req.body
-		controller.setAsAdmin(id, body).then(result=>{
+		controller.setAsAdmin(id).then(result=>{
 			res.send(result);
 		});
 	});
