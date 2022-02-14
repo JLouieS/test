@@ -32,14 +32,28 @@
 			res.send(outcome);
 		});
 	});
-	//[SECTION] Routes [DELETE]
+	//Delete Product
 	route.delete('/:id', (req, res)=>{
 		let id = req.params.id
 		controller.deleteProduct(id).then(result=>{
 			res.send(result);
 		});
 	});
-
+	//Archived Product
+	route.put('/:productId/archive', (req, res)=>{
+		let id = req.params;
+		controller.archiveProduct(id).then(result=>{
+			res.send(result);
+		});
+	});
+	//Update Product
+	route.put('/:productId', (req, res)=>{
+		let params = req.params;
+		let body = req.body;
+		controller.updateProduct(params, body).then(result=>{
+			res.send(result);
+		});
+	});
 
 //[SECTION] Export
 	module.exports = route;

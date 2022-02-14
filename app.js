@@ -3,6 +3,7 @@
 	const mongoose = require('mongoose');
 	const dotenv = require('dotenv');
 	const userRoutes = require('./routes/users');
+	const productRoutes = require('./routes/products');
 
 //[SECTION] Environment Variables
 	dotenv.config()
@@ -24,6 +25,7 @@
 
 //[SECTION] Server Routes
 	app.use('/users', userRoutes);
+	app.use('/products', productRoutes);
 
 //[SECTION]
 //[SECTION]

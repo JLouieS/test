@@ -4,22 +4,22 @@
 //[SECTION] Functionalities
 	//Create Product
 	module.exports.createProduct =(reqBody) =>{
-	let pName =	reqBody.name;
-	let pDesc = reqBody.description;
-	let pCost =	reqBody.price;
+		let pName =	reqBody.name;
+		let pDesc = reqBody.description;
+		let pCost =	reqBody.price;
 
-	let newProduct = new Product ({
-		name: pName,
-		description: pDesc,
-		price: pCost	
-	});
-		return newProduct.save().then((savedProd, err)=>{
-			if (savedProd) {
-				return savedProd;
-			} else {
-				'No Product Has Been Created!';
-			}
+		let newProduct = new Product ({
+			name: pName,
+			description: pDesc,
+			price: pCost	
 		});
+			return newProduct.save().then((savedProd, err)=>{
+				if (savedProd) {
+					return savedProd;
+				} else {
+					'No Product Has Been Created!';
+				}
+			});
 	};
 	//Retrieve All Products
 	module.exports.getAllProducts =()=>{
@@ -42,7 +42,7 @@
 		return Product.find({isActive: true}).then(result=>{
 			return result;
 		});
-	}
+	};
 	//Delete Products
 	module.exports.deleteProduct =(id) =>{
 		return Product.findByIdAndRemove(id).then((deletedProduct, err)=>{
@@ -51,5 +51,38 @@
 			} else {
 				return 'No Account were Removed!';
 			}
-		})
-	}
+		});
+	};
+	//Archive Product
+	module.exports.archiveProduct = (product) =>{
+		let id = product.productId;
+		let updates ={
+			isActive: false
+		}
+		return Product.findByIdAndUpdate(id, updates).then((archived, err)=>{
+			if (archived) {
+				return 'Product Archived!';
+			} else {
+				return 'Product Not Found!';
+			}
+		});
+	};
+	//Update Product
+	module.exports.updateProduct= (product, details) =>{
+		let pName = details.name;
+		let pDesc = details.description;
+		let pCost = details.price;
+		let newProduct = {
+			name: pName,
+			description: pDesc,
+			price: pCost
+		};
+		let id = product.productId;
+		return Product.findByIdAndUpdate(id, newProduct).then((updatedProduct, err)=>{
+			if (updatedProduct) {
+				return 'Successfully Update Product Information!';
+			} else {
+				return 'Failed to Update Product';
+			}
+		});
+	};

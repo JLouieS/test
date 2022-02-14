@@ -22,7 +22,7 @@
 		createdOn: {
 			type: Date,
 			default: new Date()
-		}
+		},
 		orders: [ 
 		{
 			orderId: {
