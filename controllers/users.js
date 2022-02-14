@@ -53,7 +53,7 @@
 		};
 		return User.findByIdAndUpdate(userId, updateUser).then((admin, err)=>{
 			if (admin) {
-				return`${admin.firstName} has been set as Admin.`;
+				return `${admin.firstName} has been set as Admin.`;
 			} else {
 				return "Failed to Set as Admin!";
 			}
