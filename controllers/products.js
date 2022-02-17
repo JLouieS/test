@@ -1,7 +1,7 @@
 //[SECTION] Modules and Dependencies
 	const Product = require('../models/Product');
 
-//[SECTION] Functionalities
+//[SECTION] Functionalities [Create]
 	//Create Product
 	module.exports.createProduct =(reqBody) =>{
 		let pName =	reqBody.name;
@@ -21,6 +21,7 @@
 				}
 			});
 	};
+//[SECTION] Functionalities [Retrieve]
 	//Retrieve All Products
 	module.exports.getAllProducts =()=>{
 		return Product.find({}).then(result=>{
@@ -43,16 +44,7 @@
 			return result;
 		});
 	};
-	//Delete Products
-	module.exports.deleteProduct =(id) =>{
-		return Product.findByIdAndRemove(id).then((deletedProduct, err)=>{
-			if (deletedProduct) {
-				return 'Account Deleted Successfully!';
-			} else {
-				return 'No Account were Removed!';
-			}
-		});
-	};
+//[SECTION] Functionalities [Update]
 	//Archive Product
 	module.exports.archiveProduct = (product) =>{
 		let id = product.productId;
@@ -83,6 +75,17 @@
 				return 'Successfully Update Product Information!';
 			} else {
 				return 'Failed to Update Product';
+			}
+		});
+	};
+//[SECTION] Functionalities [Delete]
+	//Delete Products
+	module.exports.deleteProduct =(id) =>{
+		return Product.findByIdAndRemove(id).then((deletedProduct, err)=>{
+			if (deletedProduct) {
+				return 'Account Deleted Successfully!';
+			} else {
+				return 'No Account were Removed!';
 			}
 		});
 	};
