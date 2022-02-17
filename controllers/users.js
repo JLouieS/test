@@ -1,5 +1,6 @@
 //[SECTION] Dependencies and Modules
 	const User = require('../models/User');
+	const Product = require('../models/Product');
 	const bcrypt = require('bcrypt');
 	const auth = require('../auth');
 
@@ -48,6 +49,7 @@
 			};
 		});
 	};
+//[SECTION] Functionalities [Retrieve]
 	//Retrieve All Users
 	module.exports.getAllUsers = ()=>{
 		return User.find({}).then(resultQuery=>{
@@ -66,6 +68,7 @@
 			}
 		});
 	};
+//[SECTION] Functionalities [UPDATE]
 	//Set as Admin
 	module.exports.setAsAdmin =(userId) =>{
 		let updateUser = {
@@ -77,6 +80,19 @@
 			} else {
 				return "Failed to Set as Admin!";
 			}
+		});
+	};
+	//Set as Non-Admin
+	module.exports.setAsNonAdmin = (userId) =>{
+		let updateUser = {
+			isAdmin: false
+		}
+		return User.findByIdAndUpdate(userId, updateUser).then((user, err)=>{
+			if (user) {
+				return `${user.firstName} has been set back to a Regular User.`; 
+			} else {
+				return 'Failed to Update User';
+			};
 		});
 	};
 	//Check if Email Exists
@@ -92,6 +108,7 @@
 			}
 		});
 	};
+//[SECTION] Functionalities [DELETE]
 	//Delete User
 	module.exports.deleteUser =(id) =>{
 		return User.findByIdAndRemove(id).then((deletedUser, err)=>{
