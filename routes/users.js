@@ -69,5 +69,5 @@
 			res.send(result);
 		});
 	});
-
+//[SECTION] Export
 module.exports = route;

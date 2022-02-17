@@ -1,17 +1,18 @@
 //[SECTION] Dependencies and Modules
 	const express = require('express');
 	const controller = require('../controllers/products');
+	const auth = require('../auth');
+
 //[SECTION] Routing Component
 	const route = express.Router();
 
 //[SECTION] Routes [POST]
 	//CREATE PRODUCT
-	route.post('/create', (req, res) =>{
+	route.post('/create', auth.verify,(req, res) =>{
+		let isAdmin = auth.decode(req.headers.authorization).isAdmin;
 		let data = req.body;
-		controller.createProduct(data).then(result=>{
-			res.status(201);
-			res.send(result);
-		});
+		isAdmin ? controller.createProduct(data).then(result=>res.send(result))
+		: res.send('User Unauthorized to Proceed!');
 	});
 //[SECTION] Routes [GET]
 	//Retrieve All Products
@@ -35,19 +36,21 @@
 	});
 //[SECTION] Routes [PUT]
 	//Archived Product
-	route.put('/:productId/archive', (req, res)=>{
+	route.put('/:productId/archive', auth.verify,(req, res)=>{
+		let token = req.headers.authorization;
+		let isAdmin = auth.decode(token).isAdmin;
 		let id = req.params;
-		controller.archiveProduct(id).then(result=>{
-			res.send(result);
-		});
+		isAdmin ? controller.archiveProduct(id).then(result=>res.send(result))
+		: res.send('User Unauthorized!');
 	});
 	//Update Product
-	route.put('/:productId', (req, res)=>{
+	route.put('/:productId', auth.verify,(req, res)=>{
+		let token = req.headers.authorization;
+		let isAdmin = auth.decode(token).isAdmin;
 		let params = req.params;
 		let body = req.body;
-		controller.updateProduct(params, body).then(result=>{
-			res.send(result);
-		});
+		isAdmin ? controller.updateProduct(params, body).then(result=>res.send(result))
+		: res.send('User Unauthorized!');
 	});
 //[SECTION] Routes [DELETE]
 	//Delete Product
