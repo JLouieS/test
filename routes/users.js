@@ -6,7 +6,7 @@
 //[SECTION] Routing Component
 	const route = exp.Router();
 
-//[SECTION] Routes [GET]
+//[SECTION] Routes [POST]
 	//Register User
 	route.post('/register', (req, res)=>{
 		let userData = req.body;
@@ -23,6 +23,15 @@
 		})
 	})
 
+	//Email Checker
+	route.post('/check-email', (req, res)=>{
+		let email = req.body;
+		controller.checkEmailExists(email).then(result=>{
+			res.send(result);
+		})
+	});
+
+//[SECTION] Routes [GET]
 	//Retrieve All Users
 	route.get('/',(req, res)=>{
 		controller.getAllUsers().then(result=>{
@@ -53,14 +62,6 @@
 		let id = req.params.userId;
 		isAdmin ? controller.setAsNonAdmin(id).then(result=>res.send(result))
 		: res.send('Unauthorized User');
-	});
-//[SECTION] Routes [POST]
-	//Email Checker
-	route.post('/check-email', (req, res)=>{
-		let email = req.body;
-		controller.checkEmailExists(email).then(result=>{
-			res.send(result);
-		})
 	});
 //[SECTION] Routes [DELETE]
 	route.delete('/:id', (req, res)=>{

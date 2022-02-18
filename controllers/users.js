@@ -3,6 +3,7 @@
 	const Product = require('../models/Product');
 	const bcrypt = require('bcrypt');
 	const auth = require('../auth');
+	const Order = require('../models/Order');
 
 //[SECTION] Functionalities [Create]
 	//Register User
@@ -49,6 +50,7 @@
 			};
 		});
 	};
+		
 //[SECTION] Functionalities [Retrieve]
 	//Retrieve All Users
 	module.exports.getAllUsers = ()=>{

@@ -5,6 +5,7 @@
 	const cors = require('cors');
 	const userRoutes = require('./routes/users');
 	const productRoutes = require('./routes/products');
+	const orderRoutes = require('./routes/orders');
 
 //[SECTION] Environment Variables
 	dotenv.config()
@@ -27,6 +28,7 @@
 //[SECTION] Server Routes
 	app.use('/users', userRoutes);
 	app.use('/products', productRoutes);
+	app.use('/orders', orderRoutes);
 
 //[SECTION]
 //[SECTION]

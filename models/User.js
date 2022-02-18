@@ -27,25 +27,20 @@
 			type: Boolean,
 			default: false
 		},
-		orders: [{
-			products: [{
-				productName: {
+		orders: [
+			{
+				productId: {
 					type: String,
 					required: [true, "Product Name is Required"]
 				},
 				quantity: {
 					type: Number,
 					required: [true, "Quantity is Required"]
-						}
-			}],
-			total: {
-				type: Number,
-				required: [true, "Total Amount is Required!"]
-			},
-			purchasedOn: {
-				type: Date,
-				default: new Date()
-			}
+				},
+				purchasedOn: {
+					type: Date,
+					default: new Date()
+				}
 		}]
 	});
 
