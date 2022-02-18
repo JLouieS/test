@@ -50,7 +50,6 @@
 			};
 		});
 	};
-		
 //[SECTION] Functionalities [Retrieve]
 	//Retrieve All Users
 	module.exports.getAllUsers = ()=>{

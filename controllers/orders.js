@@ -5,7 +5,7 @@
 	const auth = require('../auth');
 	const Order = require('../models/Order');
 
-
+//[SECTION] Functionalities [Create]
 	//Create Order
 	module.exports.createOrder = async (data)=>{
 		let id = data.userId;
@@ -53,4 +53,11 @@
 				return order;
 			}
 		})
+	};
+	//Retrieve Authenticated User's Orders
+	module.exports.getOrders =(id)=>{
+		return Order.find({userId: id}).then(result=>{
+			//put here the find of the total amount
+			return result;
+		});
 	};

@@ -5,8 +5,8 @@
 
 //[SECTION] Routing Component
 	const route = express.Router();
-
-//Create Order
+//[SECTION] Routes [POST]
+	//Create Order
 	route.post('/', auth.verify, (req, res)=>{
 		let token = req.headers.authorization;
 		let payload = auth.decode(token);
@@ -29,6 +29,14 @@
 			res.send('User not allowed to create an order!');
 		};
 	});
-	
+//[SECTION] Routes [GET]
+	route.get('/', auth.verify, (req,res)=>{
+		let userData = auth.decode(req.headers.authorization);
+		let userId = userData.id;
+		controller.getOrders(userId).then(outcome=>{
+			res.send(outcome);
+		});
+	})
+
 //[SECTION] Export
 module.exports = route;
