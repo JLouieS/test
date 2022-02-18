@@ -13,7 +13,7 @@
 		let quantity = parseInt(data.quantity);
 
 			let price = "";
-		let isProductUpdated = await Product.findById(order).then(product=>{
+		let saveProduct = await Product.findById(order).then(product=>{
 				price +=product.price;
 			product.orders.push({orderId: order});
 			return product.save().then((saved, err)=>{
@@ -30,7 +30,7 @@
 			productId: order,
 			quantity: quantity,
 		}
-		let isUserUpdated = await User.findById(id).then(user=>{
+		let saveUser = await User.findById(id).then(user=>{
 			user.orders.push(myOrder);
 			return user.save().then((saved, err)=>{
 				if (err) {
