@@ -101,6 +101,34 @@
 			};
 		});
 	};
+	//Change Password
+	module.exports.changePassword =(data)=>{
+		let eMail = data.email;
+		let oldPass = data.oldPassword;
+		let newPass = data.newPassword;
+		return User.findOne({email: eMail}).then(result=>{
+			if (result === null) {
+				return 'Email Does Not Exist';
+			} else {
+				let passWord = result.password;
+				const isMatched = bcrypt.compareSync(oldPass, passWord);
+				if (isMatched) {
+					let newPassWord = {
+						password: bcrypt.hashSync(newPass,10)
+					}
+					return User.findOneAndUpdate({email: eMail}, newPassWord).then((updated, err)=>{
+						if (updated) {
+							return 'Successfully Changed Password!';
+						} else {
+							return 'Failed to save New Password!';
+						}
+					})
+				} else {
+					return 'Password Mismatched! Check Again!';
+				}
+			}
+		});
+	};
 //[SECTION] Functionalities [DELETE]
 	//Delete User
 	module.exports.deleteUser =(id) =>{

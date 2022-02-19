@@ -56,6 +56,13 @@
 		isAdmin ? controller.setAsNonAdmin(id).then(result=>res.send(result))
 		: res.send('Unauthorized User');
 	});
+	//Change Password
+	route.put('/change-password', (req,res)=>{
+		let id = req.body;
+		controller.changePassword(id).then(outcome=>{
+			res.send(outcome);
+		});
+	});
 //[SECTION] Routes [DELETE]
 	route.delete('/:id', auth.verify,(req, res)=>{
 		let token = req.headers.authorization;
