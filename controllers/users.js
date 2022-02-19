@@ -21,8 +21,7 @@
 				lastName: lName,
 				middleName: mName,
 				email: email,
-				password: bcrypt.hashSync(passW, 10)
-				
+				password: bcrypt.hashSync(passW, 10)			
 			});
 				return newUser.save().then((user, err)=>
 				{
@@ -36,7 +35,6 @@
 				return 'Email Already Used!'
 			}
 		});
-
 	};
 	//Login User
 	module.exports.loginUser =(reqBody)=>{
