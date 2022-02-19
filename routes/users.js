@@ -20,17 +20,8 @@
 		let data = req.body;
 		controller.loginUser(data).then(result =>{
 			res.send(result);
-		})
-	})
-
-	//Email Checker
-	route.post('/check-email', (req, res)=>{
-		let email = req.body;
-		controller.checkEmailExists(email).then(result=>{
-			res.send(result);
-		})
+		});
 	});
-
 //[SECTION] Routes [GET]
 	//Retrieve All Users
 	route.get('/', auth.verify, (req, res)=>{

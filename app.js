@@ -13,8 +13,7 @@
 	const port = process.env.PORT;
 
 //[SECTION] Database Connection 
-	mongoose.connect(credentials)
-// Just to test the connection	
+	mongoose.connect(credentials)	
 	let db = mongoose.connection;
 
 	db.once('open',()=>{

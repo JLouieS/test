@@ -14,22 +14,29 @@
 		let email = data.email;
 		let passW = data.password;
 
+		return User.findOne({email: email}).then(result=>{
+			if (result === null) {
 			let newUser = new User({
 				firstName: fName,
 				lastName: lName,
 				middleName: mName,
 				email: email,
-				password: bcrypt.hashSync(passW, 10),
+				password: bcrypt.hashSync(passW, 10)
+				
 			});
-			
-			return newUser.save().then((user, err)=>
-			{
-				if (user) {
-					return `Successfully Registered!`;
-				} else {
-					return false;
-				}
-			});
+				return newUser.save().then((user, err)=>
+				{
+					if (user) {
+						return `Successfully Registered!`;
+					} else {
+						return false;
+					}
+				});
+			} else {
+				return 'Email Already Used!'
+			}
+		});
+
 	};
 	//Login User
 	module.exports.loginUser =(reqBody)=>{
@@ -94,19 +101,6 @@
 			} else {
 				return 'Failed to Update User';
 			};
-		});
-	};
-	//Check if Email Exists
-	module.exports.checkEmailExists = (reqBody) =>{
-		let doesExist = {
-			email: reqBody.email
-		}
-		return User.find(doesExist).then((exist, err)=>{
-			if (exist.length > 0) {
-				return `Email already exists!`;
-			} else {
-				return `Email is still available!`;
-			}
 		});
 	};
 //[SECTION] Functionalities [DELETE]
