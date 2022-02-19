@@ -57,14 +57,22 @@
 //[SECTION] Functionalities [Retrieve]
 	//Retrieve Authenticated User's Orders
 	module.exports.getOrders =(id)=>{
-		return Order.find({userId: id}).then(result=>{
-			//put here the find of the total amount
-			return result;
-		});
-	};
+			return Order.find({userId: id}).then(result=>{
+				return result;
+			});
+		};
+
 	//Retrieve All Orders
 	module.exports.getAllOrders = ()=>{
 		return Order.find({}).then(result=>{
 			return result;
+		});
+	};
+	//Retrieve Orders (Checkout)
+	module.exports.checkOutOrders =(id)=>{
+		return Order.find({userId: id}).then(result=>{
+			let totalAmount = result.map(x=>x.totalAmount).reduce((a,b)=>a+b,0);
+			return `Total Amount to Pay: P${totalAmount} 
+			${result}`;
 		});
 	};

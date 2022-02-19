@@ -43,6 +43,13 @@
 		isAdmin ? controller.getAllOrders().then(result=>res.send(result))
 		: res.send('User Not Authorized!');
 	});
+	route.get('/checkout', auth.verify, (req, res)=>{
+		let userData = auth.decode(req.headers.authorization);
+		let userId = userData.id;
+		controller.checkOutOrders(userId).then(outcome=>{
+			res.send(outcome);
+		});
+	})
 
 //[SECTION] Export
 module.exports = route;
