@@ -15,7 +15,6 @@
 			let price = "";
 		let saveProduct = await Product.findById(order).then(product=>{
 				price +=product.price;
-			product.orders.push({orderId: order});
 			return product.save().then((saved, err)=>{
 				if (err) {
 					return false;

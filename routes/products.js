@@ -54,11 +54,12 @@
 	});
 //[SECTION] Routes [DELETE]
 	//Delete Product
-	route.delete('/:id', (req, res)=>{
-		let id = req.params.id
-		controller.deleteProduct(id).then(result=>{
-			res.send(result);
-		});
+	route.delete('/:id', auth.verify,(req, res)=>{
+		let token = req.headers.authorization;
+		let isAdmin = auth.decode(token).isAdmin;
+		let id = req.params.id;
+		isAdmin ? controller.deleteProduct(id).then(result=>res.send(result))
+		: res.send('User Unauthorized!');
 	});
 //[SECTION] Export
 	module.exports = route;

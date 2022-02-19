@@ -21,11 +21,11 @@
 				email: email,
 				password: bcrypt.hashSync(passW, 10),
 			});
-
+			
 			return newUser.save().then((user, err)=>
 			{
 				if (user) {
-					return user;
+					return `Successfully Registered!`;
 				} else {
 					return false;
 				}

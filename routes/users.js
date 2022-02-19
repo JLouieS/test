@@ -33,17 +33,19 @@
 
 //[SECTION] Routes [GET]
 	//Retrieve All Users
-	route.get('/',(req, res)=>{
-		controller.getAllUsers().then(result=>{
-			res.send(result);
-		})
+	route.get('/', auth.verify, (req, res)=>{
+		let token = req.headers.authorization;
+		let isAdmin = auth.decode(token).isAdmin;
+		isAdmin ? controller.getAllUsers().then(result=>res.send(result))
+		: res.send('Unauthorized User!');
 	});
 	//Retrieve Single User
-	route.get('/:details', (req, res)=>{
-		let details = req.params.details
-		controller.getUser(details).then(result=>{
-			res.send(result);
-		});
+	route.get('/:details', auth.verify,(req, res)=>{
+		let token = req.headers.authorization;
+		let isAdmin = auth.decode(token).isAdmin;
+		let details = req.params.details;
+		isAdmin ? controller.getUser(details).then(result=>res.send(result))
+		: res.send('Unauthorized User!');
 	});
 //[SECTION] Routes [PUT]
 	//Set as Admin
@@ -64,11 +66,12 @@
 		: res.send('Unauthorized User');
 	});
 //[SECTION] Routes [DELETE]
-	route.delete('/:id', (req, res)=>{
+	route.delete('/:id', auth.verify,(req, res)=>{
+		let token = req.headers.authorization;
+		let isAdmin = auth.decode(token).isAdmin;
 		let id = req.params.id
-		controller.deleteUser(id).then(result=>{
-			res.send(result);
-		});
+		isAdmin ? controller.deleteUser(id).then(result=>res.send(result))
+		: res.send('Unauthorized User!');
 	});
 //[SECTION] Export
 module.exports = route;
