@@ -36,7 +36,13 @@
 		controller.getOrders(userId).then(outcome=>{
 			res.send(outcome);
 		});
-	})
+	});
+	route.get('/all', auth.verify, (req,res)=>{
+		let userData = auth.decode(req.headers.authorization);
+		let isAdmin = userData.isAdmin;
+		isAdmin ? controller.getAllOrders().then(result=>res.send(result))
+		: res.send('User Not Authorized!');
+	});
 
 //[SECTION] Export
 module.exports = route;

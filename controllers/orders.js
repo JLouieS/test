@@ -54,10 +54,17 @@
 			}
 		})
 	};
+//[SECTION] Functionalities [Retrieve]
 	//Retrieve Authenticated User's Orders
 	module.exports.getOrders =(id)=>{
 		return Order.find({userId: id}).then(result=>{
 			//put here the find of the total amount
+			return result;
+		});
+	};
+	//Retrieve All Orders
+	module.exports.getAllOrders = ()=>{
+		return Order.find({}).then(result=>{
 			return result;
 		});
 	};
