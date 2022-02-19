@@ -6,7 +6,12 @@
   "scripts": {
     "start": "nodemon app"
   },
-  "keywords": [],
+  "keywords": [
+    "Ecommerce",
+    "Capstone",
+    "API",
+    "footwear",
+    "shoes"],
   "author": "John Louie Sequena",
   "license": "ISC",
   "dependencies": {
