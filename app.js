@@ -15,7 +15,6 @@
 //[SECTION] Database Connection 
 	mongoose.connect(credentials)	
 	let db = mongoose.connection;
-
 	db.once('open',()=>{
 		console.log('Connected to MongoDB')
 	});
@@ -29,7 +28,6 @@
 	app.use('/products', productRoutes);
 	app.use('/orders', orderRoutes);
 
-//[SECTION]
 //[SECTION]
 	app.listen(port, ()=>console.log(`You are now Tuning in Port ${port}`));
 	app.get('/',(req,res)=>{
