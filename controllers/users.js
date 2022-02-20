@@ -32,7 +32,7 @@
 					}
 				});
 			} else {
-				return 'Email Already Used!'
+				return 'Email Already Used! Try Another Email!';
 			}
 		});
 	};

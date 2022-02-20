@@ -13,8 +13,10 @@
 		let quantity = parseInt(data.quantity);
 
 			let price = "";
+			let prodName = "";
 		let saveProduct = await Product.findById(order).then(product=>{
 				price +=product.price;
+				prodName += product.name;
 			return product.save().then((saved, err)=>{
 				if (err) {
 					return false;
@@ -39,10 +41,12 @@
 				}
 			});
 		});
+
 		let newOrder = new Order({
 			userId: id,
 			productId: order,
 			quantity: quantity,
+			productName: prodName,
 			totalAmount: total
 		})
 		return newOrder.save().then((order, err)=>{
