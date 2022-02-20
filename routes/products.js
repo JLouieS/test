@@ -16,10 +16,11 @@
 	});
 //[SECTION] Routes [GET]
 	//Retrieve All Products
-	route.get('/all', (req, res)=>{
-		controller.getAllProducts().then(result=>{
-			res.send(result);
-		});
+	route.get('/all', auth.verify,(req, res)=>{
+		let token = req.headers.authorization;
+		let isAdmin = auth.decode(token).isAdmin;
+		isAdmin ?controller.getAllProducts().then(result=>res.send(result))
+		: res.send('Unauthorized User!');
 	});
 	//RETRIEVE SINGLE PRODUCT
 	route.get('/:id',(req, res)=>{
