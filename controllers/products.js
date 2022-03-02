@@ -17,7 +17,7 @@
 				if (savedProd) {
 					return savedProd;
 				} else {
-					'No Product Has Been Created!';
+					false;
 				}
 			});
 	};
@@ -34,7 +34,7 @@
 			if (foundProduct) {
 				return foundProduct;
 			} else {
-				return 'Product Not Found!';
+				return false;
 			}
 		});
 	};
@@ -53,9 +53,9 @@
 		}
 		return Product.findByIdAndUpdate(id, updates).then((archived, err)=>{
 			if (archived) {
-				return 'Product Archived!';
+				return true;
 			} else {
-				return 'Product Not Found!';
+				return false;
 			}
 		});
 	};
@@ -72,9 +72,9 @@
 		let id = product.productId;
 		return Product.findByIdAndUpdate(id, newProduct).then((updatedProduct, err)=>{
 			if (updatedProduct) {
-				return 'Successfully Update Product Information!';
+				return true;
 			} else {
-				return 'Failed to Update Product';
+				return false;
 			}
 		});
 	};

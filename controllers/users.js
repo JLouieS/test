@@ -26,13 +26,13 @@
 				return newUser.save().then((user, err)=>
 				{
 					if (user) {
-						return `Successfully Registered!`;
+						return user;
 					} else {
 						return false;
 					}
 				});
 			} else {
-				return 'Email Already Used! Try Another Email!';
+				return false;
 			}
 		});
 	};
@@ -42,7 +42,7 @@
 		let uPass = reqBody.password;
 		return User.findOne({email: uEmail}).then(result=>{
 			if (result === null) {
-				return 'Email does not Exist!';
+				return false;
 			} else {
 				let passW = result.password;
 				const isMatched = bcrypt.compareSync(uPass, passW);
@@ -50,7 +50,7 @@
 					let data = result.toObject();
 					return {access: auth.createAccessToken(data)}
 				} else {
-					return 'Passwords Does Not Match. Check Credentials!';
+					return false;
 				}
 			};
 		});
@@ -82,9 +82,9 @@
 		};
 		return User.findByIdAndUpdate(userId, updateUser).then((admin, err)=>{
 			if (admin) {
-				return `${admin.firstName} has been set as Admin.`;
+				return true;
 			} else {
-				return "Failed to Set as Admin!";
+				return false;
 			}
 		});
 	};
@@ -95,9 +95,9 @@
 		}
 		return User.findByIdAndUpdate(userId, updateUser).then((user, err)=>{
 			if (user) {
-				return `${user.firstName} has been set back to a Regular User.`; 
+				return true; 
 			} else {
-				return 'Failed to Update User';
+				return false;
 			};
 		});
 	};

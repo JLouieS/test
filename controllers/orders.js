@@ -75,7 +75,6 @@
 	module.exports.checkOutOrders =(id)=>{
 		return Order.find({userId: id}).then(result=>{
 			let totalAmount = result.map(x=>x.totalAmount).reduce((a,b)=>a+b,0);
-			return `Total Amount to Pay: P${totalAmount} 
-			${result}`;
+			return {totalAmount, result};
 		});
 	};
