@@ -11,6 +11,7 @@
 		let fName = data.firstName;
 		let lName = data.lastName;
 		let mName = data.middleName;
+		let mobil = data.mobileNo;
 		let email = data.email;
 		let passW = data.password;
 
@@ -20,6 +21,7 @@
 				firstName: fName,
 				lastName: lName,
 				middleName: mName,
+				mobileNo: mobil,
 				email: email,
 				password: bcrypt.hashSync(passW, 10)			
 			});

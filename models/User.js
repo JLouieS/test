@@ -15,6 +15,10 @@
 			type: String,
 			required: [true, 'Middle Name Name is Required']
 		},
+		mobileNo: {
+			type: String,
+			required: [true, 'Mobile Number is Required']
+		},
 		email: {
 			type: String,
 			required: [true, 'Email is Required']
