@@ -31,12 +31,10 @@
 		: res.send('Unauthorized User!');
 	});
 	//Retrieve Single User
-	route.get('/:details', auth.verify,(req, res)=>{
-		let token = req.headers.authorization;
-		let isAdmin = auth.decode(token).isAdmin;
-		let details = req.params.details;
-		isAdmin ? controller.getUser(details).then(result=>res.send(result))
-		: res.send('Unauthorized User!');
+	route.get('/details', auth.verify,(req, res)=>{
+		let token = auth.decode(req.headers.authorization);
+		let details = token.id;
+		controller.getUser(details).then(result=>res.send(result))
 	});
 //[SECTION] Routes [PUT]
 	//Set as Admin

@@ -66,14 +66,8 @@
 	};
 	//Retrieve Single User
 	module.exports.getUser = (id) =>{
-		return User.findById(id).then((foundUser, err)=>{
-			
-			if (foundUser) {
-				foundUser.password = '';
-				return foundUser;
-			} else {
-				return 'User Not Found';
-			}
+		return User.findById(id).then((result)=>{	
+			return result;
 		});
 	};
 //[SECTION] Functionalities [UPDATE]
