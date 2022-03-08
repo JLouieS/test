@@ -44,6 +44,14 @@
 		isAdmin ? controller.archiveProduct(id).then(result=>res.send(result))
 		: res.send('User Unauthorized!');
 	});
+	//Reactivate Product
+	route.put('/:productId/reactivate', auth.verify,(req, res)=>{
+		let token = req.headers.authorization;
+		let isAdmin = auth.decode(token).isAdmin;
+		let id = req.params;
+		isAdmin ? controller.reactivateProduct(id).then(result=>res.send(result))
+		: res.send('User Unauthorized!');
+	});
 	//Update Product
 	route.put('/:productId', auth.verify,(req, res)=>{
 		let token = req.headers.authorization;

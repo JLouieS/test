@@ -59,6 +59,20 @@
 			}
 		});
 	};
+	//ReActivate Product
+	module.exports.reactivateProduct = (product) =>{
+		let id = product.productId;
+		let updates ={
+			isActive: true
+		}
+		return Product.findByIdAndUpdate(id, updates).then((reactivated, err)=>{
+			if (reactivated) {
+				return true;
+			} else {
+				return false;
+			}
+		});
+	};
 	//Update Product
 	module.exports.updateProduct= (product, details) =>{
 		let pName = details.name;
